@@ -1,0 +1,20 @@
+@use "sass:math"as math;
+//Container & Breakpoints
+$maxWidthContainer: 1560;
+$containerPadding: 40;
+$containerWidth: $maxWidthContainer + $containerPadding;
+$containerSidePadding: math.div($containerPadding, 2);
+
+$maxWidth: 1560;
+$minWidth: 320;
+
+//Fonts
+$fontMain: 'Lato',
+sans-serif;
+
+//Colors
+$primary: #101010;
+$accent: #ED4C5C;
+$white: #ffffff;
+$black: #000000;
+$bg: #3ea1e2;

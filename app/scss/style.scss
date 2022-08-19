@@ -1,0 +1,251 @@
+@import 'reset';
+@import 'fonts';
+@import 'vars';
+@import 'global';
+// @import 'libs';
+@import 'mixin';
+
+
+
+.header {
+    padding: 50px 0;
+
+    @include r(1024) {
+        padding: 30px 0;
+    }
+
+    &__wrapper {
+        @include r(1024) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__text {
+        font-size: 25px;
+        color: $accent;
+    }
+}
+
+.burger {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    padding: 16px 20px;
+    margin-left: auto;
+    border: 5px solid transparent;
+    border-radius: 5px;
+    display: none;
+    cursor: pointer;
+
+    &:focus {
+        border: 5px solid rgba(76, 226, 237, 0.1);
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        background-color: $bg;
+        width: 20px;
+        height: 2px;
+        transition: transform 0.5s ease 0s;
+    }
+
+    &::before {
+        top: 6px;
+    }
+
+    &::after {
+        bottom: 8px;
+    }
+
+    @include r(1024) {
+        display: block;
+    }
+
+    &__line {
+        position: absolute;
+        background-color: $bg;
+        left: 10px;
+        width: 20px;
+        height: 2px;
+        top: 14px;
+        transition: transform 0.5s ease 0s;
+    }
+
+    &.active {
+        .burger__line {
+            transform: scale(0);
+        }
+
+        &::before {
+            transform: rotate(50deg);
+            top: 50%;
+        }
+
+        &::after {
+            transform: rotate(-50deg);
+            top: 50%;
+        }
+    }
+}
+
+.main-page {
+    &__title {
+        @include adaptiveValue("font-size", 30, 20);
+        letter-spacing: 3px;
+        text-align: center;
+        @include adaptiveValue("margin-bottom", 35, 20);
+
+    }
+
+    &__wrapper {
+        @media screen and (min-width: 1025px) {
+            grid-template-columns: 35% 65%;
+        }
+
+        display: grid;
+    }
+}
+
+.sidebar {
+    background-color: $bg;
+    padding: 30px 0;
+    @include adaptiveValue("font-size", 20, 16, 1560, 1024, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    @include r(1024) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include adaptiveValue("width", 350, 250, 1024, 320, 1);
+        padding: 30px 0 30px;
+        transform: translateX(-200%);
+        transition: transform 0.3s ease 0s;
+    }
+
+    &.active {
+        transform: translateX(0);
+    }
+
+    &__menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 auto;
+    }
+
+    &__button {
+        position: relative;
+        width: 100%;
+        color: $white;
+        text-align: left;
+        padding: 20px 10px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        border-bottom: 1px solid rgba(36, 7, 148, 0.3);
+
+        &:hover {
+            color: rgba($primary, 0.7);
+        }
+
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            padding-right: 5px;
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            right: 10px;
+            background: url('../images/icons/arrow.svg') no-repeat;
+            transform: rotate(-90deg) translateX(50%);
+
+            @include r(1024) {
+                display: none;
+            }
+        }
+
+        &.active {
+            background-color: rgba(9, 67, 105, 0.3);
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__item {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &__article {
+        @media screen and (min-width: 576px) {
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__image {
+
+        @media screen and (min-width: 576px) {
+            flex: 0 0 260px;
+            @include adaptiveValue("margin-right", 30, 10);
+        }
+
+        @include r(575) {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+    }
+
+    &__info {
+        flex: 1 1 auto;
+    }
+
+    &__title {
+        @include adaptiveValue("margin-bottom", 30, 20);
+    }
+
+    &__reviews {
+        display: block;
+        color: #1d1696;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    &__price {
+        display: block;
+        color: $accent;
+        margin-bottom: 10px;
+    }
+}
